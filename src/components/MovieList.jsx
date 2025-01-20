@@ -23,7 +23,7 @@ export const MovieList = ({ movies, genres }) => {
     return movies.map((movie) => ({
       ...movie,
       poster_path: buildMoviePosterPath(movie.poster_path),
-      release_date: new Date(movie.release_date),
+      release_date: movie.release_date ? new Date(movie.release_date) : 'inconnue',
       genres: genres
         .filter((genre) => movie.genre_ids.includes(genre.id))
         .map((genre) => genre.name),

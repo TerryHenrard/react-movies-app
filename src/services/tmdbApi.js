@@ -29,6 +29,13 @@ export const buildMoviePosterPath = (posterPath) => {
 
 export const fetchMovieGenres = async () => {
   const { data } = await theMovieDatabaseApi.get('/3/genre/movie/list');
-  console.log('data: ', data);
+  return data;
+};
+
+export const fetchMoviesByTitle = async (title) => {
+  const { data } = await theMovieDatabaseApi(
+    `3/search/movie?query=${encodeURIComponent(title)}&include_adult=false`
+  );
+  console.log('fetchMoviesByTitle: ', data);
   return data;
 };

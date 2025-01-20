@@ -13,7 +13,10 @@ export const MovieCard = ({
     <>
       <img src={imagePath} alt={title} width={200} />
       <p>{title}</p>
-      <p>Sorti le : {dateFormatter.format(releaseDate)}</p>
+      <p>
+        Sorti le :
+        {typeof releaseDate === 'string' ? releaseDate : dateFormatter.format(releaseDate)}
+      </p>
       <p>{voteAvg}/10⭐</p>
       {genres.map((genre, index) => (
         <p key={index}>{genre}</p>
@@ -28,7 +31,7 @@ export const MovieCard = ({
 MovieCard.propTypes = {
   imagePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.instanceOf(Date).isRequired,
+  releaseDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
   dateFormatter: PropTypes.instanceOf(Intl.DateTimeFormat).isRequired,
   voteAvg: PropTypes.number.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,

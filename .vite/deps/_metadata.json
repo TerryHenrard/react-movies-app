@@ -1,0 +1,61 @@
+{
+  "hash": "eb3d3c90",
+  "configHash": "5600b59c",
+  "lockfileHash": "767ef737",
+  "browserHash": "7d524230",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/.pnpm/react@18.3.1/node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "4f7eb4e8",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "8818706f",
+      "needsInterop": true
+    },
+    "react-router": {
+      "src": "../../node_modules/.pnpm/react-router@7.1.1_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router/dist/development/index.mjs",
+      "file": "react-router.js",
+      "fileHash": "65301dc6",
+      "needsInterop": false
+    },
+    "react-query": {
+      "src": "../../node_modules/.pnpm/react-query@3.39.3_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-query/es/index.js",
+      "file": "react-query.js",
+      "fileHash": "be2fae48",
+      "needsInterop": false
+    },
+    "react-activity": {
+      "src": "../../node_modules/.pnpm/react-activity@2.1.3_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-activity/dist/react-activity.js",
+      "file": "react-activity.js",
+      "fileHash": "f86e222b",
+      "needsInterop": true
+    },
+    "axios": {
+      "src": "../../node_modules/.pnpm/axios@1.7.9/node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "63d1f8d6",
+      "needsInterop": false
+    },
+    "prop-types": {
+      "src": "../../node_modules/.pnpm/prop-types@15.8.1/node_modules/prop-types/index.js",
+      "file": "prop-types.js",
+      "fileHash": "a41cf5d2",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-64PP5DKJ": {
+      "file": "chunk-64PP5DKJ.js"
+    },
+    "chunk-YF6YTEQP": {
+      "file": "chunk-YF6YTEQP.js"
+    },
+    "chunk-DC5AMYBS": {
+      "file": "chunk-DC5AMYBS.js"
+    }
+  }
+}
