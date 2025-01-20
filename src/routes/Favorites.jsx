@@ -1,7 +1,10 @@
+import { NavBar } from '../components/NavBar.jsx';
+
 export const Favorites = () => {
   return (
     <>
-      <p>Favorites</p>
+      <NavBar />
+      <h1>Favoris</h1>
     </>
   );
 };

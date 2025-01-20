@@ -4,6 +4,8 @@ import { Dots } from 'react-activity';
 import 'react-activity/dist/library.css';
 import { MovieList } from '../components/MovieList.jsx';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router';
+import { NavBar } from '../components/NavBar.jsx';
 
 const fetchData = async () => {
   try {
@@ -30,7 +32,7 @@ export const Home = () => {
     data: searchData,
     refetch: searchMoviesByTitle,
     isLoading: searchIsLoading,
-  } = useQuery(['searchMoviesByTitle', searchTitle], () => fetchMoviesByTitle(searchTitle), {
+  } = useQuery(['searchMoviesByTitle'], () => fetchMoviesByTitle(searchTitle), {
     enabled: false,
   });
 
@@ -41,17 +43,27 @@ export const Home = () => {
     }
   };
 
+  const handleSortMoviesFromTop = () => {
+    setMovies([...movies].sort((a, b) => b.vote_average - a.vote_average));
+  };
+
+  const handleSortMoviesFromFlop = () => {
+    setMovies([...movies].sort((a, b) => a.vote_average - b.vote_average));
+  };
+
   useEffect(() => {
     if (searchData) {
+      console.log('searchData: ', searchData);
       setMovies(searchData.results);
     } else if (data) {
       setMovies(data.upcomingMovies);
       setGenres(data.genres);
     }
-  }, [data, searchData]);
+  }, [searchData, data]);
 
   return (
     <>
+      <NavBar />
       <h1>React Movies</h1>
       <form onSubmit={handleSearchMovieSubmit}>
         <input
@@ -59,10 +71,12 @@ export const Home = () => {
           onChange={({ target: { value } }) => setSearchTitle(value)}
           value={searchTitle}
         />
-        <button type="submit" disabled={!searchTitle.trim()}>
-          Rechercher
-        </button>
+        <input type="submit" disabled={!searchTitle.trim()} value={'Rechercher'} />
       </form>
+      <div>
+        <button onClick={handleSortMoviesFromTop}>Top</button>
+        <button onClick={handleSortMoviesFromFlop}>Flop</button>
+      </div>
       <br />
       {(isLoading || searchIsLoading) && <Dots />}
       {error && (
@@ -70,7 +84,11 @@ export const Home = () => {
           {searchTitle ? 'Erreur lors de la recherche.' : 'Erreur lors du chargement des données.'}
         </p>
       )}
-      {movies.length > 0 && <MovieList movies={movies} genres={genres} />}
+      {movies.length > 0 ? (
+        <MovieList movies={movies} genres={genres} />
+      ) : (
+        !(isLoading || searchIsLoading) && <p>Aucun résultat</p>
+      )}
     </>
   );
 };
