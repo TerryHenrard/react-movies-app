@@ -4,7 +4,6 @@ import { Dots } from 'react-activity';
 import 'react-activity/dist/library.css';
 import { MovieList } from '../components/MovieList.jsx';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router';
 import { NavBar } from '../components/NavBar.jsx';
 
 const fetchData = async () => {
@@ -15,7 +14,7 @@ const fetchData = async () => {
     ]);
     return {
       upcomingMovies: upcomingMovies.results,
-      genres: movieGenres.genres,
+      genres: movieGenres,
     };
   } catch (error) {
     throw new Error('Failed to fetch data' + error);

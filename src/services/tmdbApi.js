@@ -28,8 +28,15 @@ export const buildMoviePosterPath = (posterPath) => {
 };
 
 export const fetchMovieGenres = async () => {
-  const { data } = await theMovieDatabaseApi.get('/3/genre/movie/list');
-  return data;
+  let cachedGenres = localStorage.getItem('genres');
+
+  if (!cachedGenres) {
+    const { data } = await theMovieDatabaseApi.get('/3/genre/movie/list');
+    localStorage.setItem('genres', JSON.stringify(data.genres));
+    return data.genres;
+  } else {
+    return JSON.parse(cachedGenres);
+  }
 };
 
 export const fetchMoviesByTitle = async (title) => {
@@ -38,4 +45,10 @@ export const fetchMoviesByTitle = async (title) => {
   );
   console.log('fetchMoviesByTitle: ', data);
   return data;
+};
+
+export const fetchFavoriteMoviesFromLocalStorage = () => {
+  const favoriteMovies = localStorage.getItem('favorite movies');
+  console.log('favoriteMovies: ', favoriteMovies ? JSON.parse(favoriteMovies) : []);
+  return favoriteMovies ? JSON.parse(favoriteMovies) : [];
 };

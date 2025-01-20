@@ -30,6 +30,17 @@ export const MovieList = ({ movies, genres }) => {
     }));
   }, [genres, movies]);
 
+  const onAddInFavorites = (movie) => {
+    let favoriteMovies = localStorage.getItem('favorite movies');
+    favoriteMovies = favoriteMovies ? JSON.parse(favoriteMovies) : [];
+
+    const isMovieAlreadyInFavorite = favoriteMovies.some((favMovie) => favMovie.id === movie.id);
+    if (!isMovieAlreadyInFavorite) {
+      favoriteMovies.push(movie);
+      localStorage.setItem('favorite movies', JSON.stringify(favoriteMovies));
+    }
+  };
+
   return (
     <>
       {processedMovies.map((movie) => (
@@ -42,6 +53,7 @@ export const MovieList = ({ movies, genres }) => {
           voteAvg={movie.vote_average}
           genres={movie.genres}
           overview={movie.overview}
+          onAddInFavorites={() => onAddInFavorites(movie)}
         />
       ))}
     </>

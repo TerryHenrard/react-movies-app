@@ -8,6 +8,7 @@ export const MovieCard = ({
   voteAvg,
   genres,
   overview,
+  onAddInFavorites,
 }) => {
   return (
     <>
@@ -23,6 +24,7 @@ export const MovieCard = ({
       ))}
       <p>Synopsis</p>
       <p>{overview}</p>
+      <button onClick={onAddInFavorites}>Ajouter aux favoris</button>
       <p>------------</p>
     </>
   );
@@ -36,4 +38,5 @@ MovieCard.propTypes = {
   voteAvg: PropTypes.number.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   overview: PropTypes.string.isRequired,
+  onAddInFavorites: PropTypes.func.isRequired,
 };
