@@ -13,7 +13,7 @@ export const MovieCard = ({
     <>
       <img src={imagePath} alt={title} width={200} />
       <p>{title}</p>
-      <p>Released the : {dateFormatter.format(releaseDate)}</p>
+      <p>Sorti le : {dateFormatter.format(releaseDate)}</p>
       <p>{voteAvg}/10⭐</p>
       {genres.map((genre, index) => (
         <p key={index}>{genre}</p>

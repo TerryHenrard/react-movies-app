@@ -7,6 +7,9 @@ const theMovieDatabaseApi = axios.create({
     Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_READONLY_TOKEN}`,
     Accept: 'application/json',
   },
+  params: {
+    language: navigator.language,
+  },
 });
 
 const theMovieDatabaseImagesApi = axios.create({
@@ -22,4 +25,10 @@ export const fetchUpcomingMovies = async () => {
 
 export const buildMoviePosterPath = (posterPath) => {
   return `${theMovieDatabaseImagesApi.getUri()}/t/p/original${posterPath}`;
+};
+
+export const fetchMovieGenres = async () => {
+  const { data } = await theMovieDatabaseApi.get('/3/genre/movie/list');
+  console.log('data: ', data);
+  return data;
 };

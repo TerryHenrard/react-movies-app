@@ -3,7 +3,14 @@ import { MovieCard } from './MovieCard.jsx';
 import { useMemo } from 'react';
 import { buildMoviePosterPath } from '../services/tmdbApi.js';
 
-export const MovieList = ({ movies }) => {
+/**
+ * MovieList component renders a list of movies.
+ *
+ * @param {Object[]} movies - Array of movie objects.
+ * @param {Object[]} genres - Array of genre objects.
+ * @returns {JSX.Element} The rendered list of movies.
+ */
+export const MovieList = ({ movies, genres }) => {
   const dateFormatter = useMemo(() => {
     return new Intl.DateTimeFormat(navigator.language, {
       day: 'numeric',
@@ -17,10 +24,12 @@ export const MovieList = ({ movies }) => {
       ...movie,
       poster_path: buildMoviePosterPath(movie.poster_path),
       release_date: new Date(movie.release_date),
+      genres: genres
+        .filter((genre) => movie.genre_ids.includes(genre.id))
+        .map((genre) => genre.name),
     }));
-  }, [movies]);
+  }, [genres, movies]);
 
-  const genres = ['SF', 'Date'];
   return (
     <>
       {processedMovies.map((movie) => (
@@ -31,7 +40,7 @@ export const MovieList = ({ movies }) => {
           releaseDate={movie.release_date}
           dateFormatter={dateFormatter}
           voteAvg={movie.vote_average}
-          genres={genres}
+          genres={movie.genres}
           overview={movie.overview}
         />
       ))}
@@ -41,4 +50,5 @@ export const MovieList = ({ movies }) => {
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
