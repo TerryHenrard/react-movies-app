@@ -84,7 +84,7 @@ export const Home = () => {
         </p>
       )}
       {movies.length > 0 ? (
-        <MovieList movies={movies} genres={genres} />
+        <MovieList movies={movies} genres={genres} areFavorites={false} />
       ) : (
         !(isLoading || searchIsLoading) && <p>Aucun résultat</p>
       )}

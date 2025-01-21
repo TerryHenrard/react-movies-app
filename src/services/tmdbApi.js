@@ -19,7 +19,6 @@ const theMovieDatabaseImagesApi = axios.create({
 
 export const fetchUpcomingMovies = async () => {
   const { data } = await theMovieDatabaseApi.get('/3/movie/upcoming');
-  console.log('fetchUpcomingMovies: ', data);
   return data;
 };
 
@@ -43,12 +42,5 @@ export const fetchMoviesByTitle = async (title) => {
   const { data } = await theMovieDatabaseApi(
     `3/search/movie?query=${encodeURIComponent(title)}&include_adult=false`
   );
-  console.log('fetchMoviesByTitle: ', data);
   return data;
-};
-
-export const fetchFavoriteMoviesFromLocalStorage = () => {
-  const favoriteMovies = localStorage.getItem('favorite movies');
-  console.log('favoriteMovies: ', favoriteMovies ? JSON.parse(favoriteMovies) : []);
-  return favoriteMovies ? JSON.parse(favoriteMovies) : [];
 };

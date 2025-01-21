@@ -8,7 +8,9 @@ export const MovieCard = ({
   voteAvg,
   genres,
   overview,
+  isFavorite,
   onAddInFavorites,
+  onRemoveFromFavorites,
 }) => {
   return (
     <>
@@ -22,9 +24,11 @@ export const MovieCard = ({
       {genres.map((genre, index) => (
         <p key={index}>{genre}</p>
       ))}
-      <p>Synopsis</p>
+      <p className={''}>Synopsis</p>
       <p>{overview}</p>
-      <button onClick={onAddInFavorites}>Ajouter aux favoris</button>
+      <button onClick={() => (isFavorite ? onRemoveFromFavorites() : onAddInFavorites())}>
+        {isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+      </button>
       <p>------------</p>
     </>
   );
@@ -38,5 +42,7 @@ MovieCard.propTypes = {
   voteAvg: PropTypes.number.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   overview: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   onAddInFavorites: PropTypes.func.isRequired,
+  onRemoveFromFavorites: PropTypes.func.isRequired,
 };

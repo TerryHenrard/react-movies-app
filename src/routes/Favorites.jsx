@@ -1,9 +1,13 @@
 import { NavBar } from '../components/NavBar.jsx';
 import { useEffect, useState } from 'react';
 import { MovieList } from '../components/MovieList.jsx';
-import { fetchFavoriteMoviesFromLocalStorage, fetchMovieGenres } from '../services/tmdbApi.js';
+import { fetchMovieGenres } from '../services/tmdbApi.js';
 import { useQuery } from 'react-query';
 import { Dots } from 'react-activity';
+import {
+  fetchFavoriteMoviesFromLocalStorage,
+  isMovieInFavorite,
+} from '../services/favoriteMoviesServices.js';
 
 // TODO: Retirer un film des favoris depuis acceuil et favoris
 
@@ -33,13 +37,29 @@ export const Favorites = () => {
     }
   }, [data]);
 
+  const onRemoveFavoriteMovieFromDisplay = (movie) => {
+    const favIndex = isMovieInFavorite(favMovies, movie);
+    if (favIndex !== -1) {
+      const updatedFavoriteMovie = [...favMovies];
+      updatedFavoriteMovie.splice(favIndex, 1);
+      setFavMovies(updatedFavoriteMovie);
+    }
+  };
+
   return (
     <>
       <NavBar />
       <h1>Favoris</h1>
       {isLoading && <Dots />}
       {error && <p>Erreur lors du chargement des données</p>}
-      {data && <MovieList movies={favMovies} genres={genres} />}
+      {data && (
+        <MovieList
+          movies={favMovies}
+          genres={genres}
+          areFavorites={true}
+          onRemoveFavoriteMovieFromDisplay={onRemoveFavoriteMovieFromDisplay}
+        />
+      )}
     </>
   );
 };
