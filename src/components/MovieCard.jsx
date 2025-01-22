@@ -14,22 +14,35 @@ export const MovieCard = ({
 }) => {
   return (
     <>
-      <img src={imagePath} alt={title} width={200} />
-      <p>{title}</p>
-      <p>
-        Sorti le :
-        {typeof releaseDate === 'string' ? releaseDate : dateFormatter.format(releaseDate)}
-      </p>
-      <p>{voteAvg}/10⭐</p>
-      {genres.map((genre, index) => (
-        <p key={index}>{genre}</p>
-      ))}
-      <p className={''}>Synopsis</p>
-      <p>{overview}</p>
-      <button onClick={() => (isFavorite ? onRemoveFromFavorites() : onAddInFavorites())}>
-        {isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
-      </button>
-      <p>------------</p>
+      <div className={'p-3 pt-7 bg-[#060D2C] w-72 grow rounded-lg relative'}>
+        <img src={imagePath} alt={title} className={'rounded-3xl w-8/12 m-auto'} />
+        <p className={'my-2.5 font-extrabold text-lg'}>{title}</p>
+        <p className={'my-2.5 text-xs text-gray-500'}>
+          Sorti le :
+          {typeof releaseDate === 'string' ? releaseDate : dateFormatter.format(releaseDate)}
+        </p>
+        <p className={'my-2.5 text-sm font-semibold'}>{voteAvg}/10⭐</p>
+        <div className={'my-2.5 flex flex-wrap gap-1 text-xs'}>
+          {genres.map((genre, index) => (
+            <p key={index} className={'bg-[#212040] rounded-full p-1.5'}>
+              {genre}
+            </p>
+          ))}
+        </div>
+        <p className={'font-semibold mt-4 mb-2'}>Synopsis</p>
+        <p className={'text-sm line-clamp-6 text-gray-500'}>{overview}</p>
+        <div className={'flex justify-center'}>
+          <button
+            className={
+              'bg-[#546FE4] text-sm p-2 rounded-full transition hover:scale-110 my-5' +
+              (isFavorite ? ' bg-red-400' : '')
+            }
+            onClick={() => (isFavorite ? onRemoveFromFavorites() : onAddInFavorites())}
+          >
+            {isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+          </button>
+        </div>
+      </div>
     </>
   );
 };

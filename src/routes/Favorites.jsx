@@ -49,17 +49,19 @@ export const Favorites = () => {
   return (
     <>
       <NavBar />
-      <h1>Favoris</h1>
+      <h1 className={'font-bold text-3xl my-5 text-center -mt-10'}>Favoris</h1>
       {isLoading && <Dots />}
       {error && <p>Erreur lors du chargement des données</p>}
-      {data && (
+      {data && (favMovies.length > 0 ? (
         <MovieList
           movies={favMovies}
           genres={genres}
           areFavorites={true}
           onRemoveFavoriteMovieFromDisplay={onRemoveFavoriteMovieFromDisplay}
         />
-      )}
+      ) : (
+        <p className="text-center">Aucun film en favoris</p>
+      ))}
     </>
   );
 };

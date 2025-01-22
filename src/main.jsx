@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import { Home } from './routes/Home.jsx';
 import { Favorites } from './routes/Favorites.jsx';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { NotFound } from './components/NotFound.jsx';
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path={'/'} element={<Home />} />
           <Route path={'/favorites'} element={<Favorites />} />
+          <Route path={'*'} element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

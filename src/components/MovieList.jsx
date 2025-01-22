@@ -70,22 +70,21 @@ export const MovieList = ({ movies, genres, areFavorites, onRemoveFavoriteMovieF
 
   return (
     <>
-      <div className={'flex flex-wrap'}>
+      <div className={'flex flex-wrap gap-3 mx-16'}>
         {processedMovies.map((movie) => (
-          <div key={movie.id} className={'w-60 grow'}>
-            <MovieCard
-              imagePath={movie.poster_path}
-              title={movie.original_title}
-              releaseDate={movie.release_date}
-              dateFormatter={dateFormatter}
-              voteAvg={movie.vote_average}
-              genres={movie.genres}
-              overview={movie.overview}
-              isFavorite={movie.isFavorite}
-              onAddInFavorites={() => onAddInFavorites(movie)}
-              onRemoveFromFavorites={() => removeFromFavorites(movie)}
-            />
-          </div>
+          <MovieCard
+            key={movie.id}
+            imagePath={movie.poster_path}
+            title={movie.original_title}
+            releaseDate={movie.release_date}
+            dateFormatter={dateFormatter}
+            voteAvg={movie.vote_average}
+            genres={movie.genres}
+            overview={movie.overview}
+            isFavorite={movie.isFavorite}
+            onAddInFavorites={() => onAddInFavorites(movie)}
+            onRemoveFromFavorites={() => removeFromFavorites(movie)}
+          />
         ))}
       </div>
     </>

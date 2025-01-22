@@ -63,18 +63,39 @@ export const Home = () => {
   return (
     <>
       <NavBar />
-      <h1>React Movies</h1>
-      <form onSubmit={handleSearchMovieSubmit}>
+      <h1 className={'font-bold text-3xl my-5 text-center -mt-10'}>React Movies</h1>
+      <form
+        onSubmit={handleSearchMovieSubmit}
+        className={'flex flex-col w-2/6 min-w-36 max-w-60 m-auto'}
+      >
         <input
           type="text"
           onChange={({ target: { value } }) => setSearchTitle(value)}
           value={searchTitle}
+          className={'text-black rounded-t-xl px-4 py-2 outline-0'}
         />
-        <input type="submit" disabled={!searchTitle.trim()} value={'Rechercher'} />
+        <input
+          type="submit"
+          disabled={!searchTitle.trim()}
+          value={'Rechercher'}
+          className={
+            'bg-[#546FE4] hover:bg-[#7891ff] transition-colors px-4 py-2 rounded-b-xl hover:cursor-pointer'
+          }
+        />
       </form>
-      <div>
-        <button onClick={handleSortMoviesFromTop}>Top</button>
-        <button onClick={handleSortMoviesFromFlop}>Flop</button>
+      <div className={'w-2/6 min-w-36 max-w-60 m-auto flex my-1.5 text-sm h-7'}>
+        <button
+          onClick={handleSortMoviesFromTop}
+          className={'w-1/2 bg-[#546FE4] hover:bg-[#7891ff] transition-colors rounded-l-xl '}
+        >
+          Top
+        </button>
+        <button
+          onClick={handleSortMoviesFromFlop}
+          className={'w-1/2 bg-[#546FE4] hover:bg-[#7891ff] transition-colors rounded-r-xl'}
+        >
+          Flop
+        </button>
       </div>
       <br />
       {(isLoading || searchIsLoading) && <Dots />}
